@@ -2,7 +2,7 @@ import json
 import pytest
 import requests
 from assertpy import assert_that
-from Models.user_model import UserModel
+from models.user_model import UserModel
 from test_data.urls import base_url
 from test_data.users_data import user_data
 
