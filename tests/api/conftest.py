@@ -1,9 +1,8 @@
-import json
 import pytest
 import requests
 from assertpy import assert_that
-from models.user_model import UserModel
-from test_data.urls import base_url
+from models.api.user_model import UserModel
+from test_data.urls import api_tests_base_url
 from test_data.users_data import user_data
 
 
@@ -11,7 +10,7 @@ from test_data.users_data import user_data
 def create_user(request):
     user_name = request.param
     post_data = user_data[user_name]
-    response = requests.post(base_url, json=post_data)
+    response = requests.post(api_tests_base_url, json=post_data)
     assert_that(response.status_code).is_equal_to(200).described_as(
         f"Failed to create user: {response.text}"
     )
@@ -24,7 +23,7 @@ def create_user(request):
 @pytest.fixture
 def get_user(create_user):
     user_name = create_user["username"]
-    url = f"{base_url}/{user_name}"
+    url = f"{api_tests_base_url}/{user_name}"
     response = requests.get(url)
     assert_that(response.status_code).is_equal_to(200).described_as(
         f"Failed to create user: {response.text}"
