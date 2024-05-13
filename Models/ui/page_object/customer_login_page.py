@@ -21,7 +21,9 @@ class CustomerLoginPage:
         return self.page.get_by_role("button", name="Home")
 
     def select_customer(self, customer):
-        self.get_customer_selector().select_option(value=customer.name)
+        self.get_customer_selector().select_option(
+            value=f"{customer.name} {customer.lastname}"
+        )
 
     def login_as_customer(self, customer):
         self.select_customer(customer)
