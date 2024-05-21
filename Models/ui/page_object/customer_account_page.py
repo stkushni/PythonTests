@@ -1,5 +1,6 @@
 import time
 
+from assertpy import assert_that
 from playwright.sync_api import expect
 
 
@@ -9,14 +10,21 @@ class CustomerAccountPage:
         self.customer = customer
 
     def get_welcome_message_text(self):
-        return self.page.get_by_text(f"Welcome {self.customer.name} !!")
+        return self.page.get_by_text(
+            f"Welcome {self.customer.name} {self.customer.lastname} !!"
+        )
 
     def get_account_selector(self):
         return self.page.locator("#accountSelect")
 
-    def get_default_account_number(self):
+    def get_default_account_info(self):
         return self.page.get_by_text(
             f"Account Number : {self.customer.account_default_id} ,"
+        )
+
+    def check_default_account_number(self, account_id: int):
+        assert_that(self.get_default_account_info().inner_text()).contains(
+            f"Account Number : {account_id} ,"
         )
 
     def get_transactions_button(self):

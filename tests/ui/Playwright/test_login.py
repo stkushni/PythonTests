@@ -29,7 +29,7 @@ def test_customer_harry_potter_login(
 
     expect(customer_account_page.get_welcome_message_text()).to_be_visible()
     expect(customer_account_page.get_account_selector()).to_be_visible()
-    expect(customer_account_page.get_default_account_number()).to_be_visible()
+    expect(customer_account_page.get_default_account_info()).to_be_visible()
     expect(customer_account_page.get_transactions_button()).to_be_visible()
     expect(customer_account_page.get_deposit_button()).to_be_visible()
     expect(customer_account_page.get_withdrawl_button()).to_be_visible()
